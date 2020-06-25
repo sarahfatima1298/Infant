@@ -1,0 +1,43 @@
+trigger:
+- master
+name: $(Date:yyyyMMdd)$(Rev:.r)
+stages:
+- stage: Build
+  jobs:
+  - job: 'Build'
+    steps:
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Write your commands here
+          echo 'Hello world'
+  - job: 'Test'
+    dependsOn: 'Build'
+    steps:
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '3.6'
+        architecture: 'x64'
+- stage: Test
+  jobs:
+  - job: "Deploy"
+    steps:
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Write your commands here
+          echo 'Hello world '
+    - task: ServiceNow-DevOps-Agent-Job-Notification@1
+      inputs:
+        connectedServiceName: 'amardevops'
+        upstream: 'Test'
+        Phase: 'COMPLETED'
+  - job: "Prod"
+    pool: server
+    dependsOn: "Deploy"
+    steps:
+    - task: Delay@1
+      inputs:
+        delayForMinutes: '0'
