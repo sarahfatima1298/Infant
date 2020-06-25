@@ -29,11 +29,6 @@ stages:
         script: |
           # Write your commands here
           echo 'Hello world '
-    - task: ServiceNow-DevOps-Agent-Job-Notification@1
-      inputs:
-        connectedServiceName: 'amardevops'
-        upstream: 'Test'
-        Phase: 'COMPLETED'
   - job: "Prod"
     pool: server
     dependsOn: "Deploy"
