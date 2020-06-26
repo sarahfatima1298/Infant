@@ -33,6 +33,18 @@ stages:
     pool: server
     dependsOn: "Deploy"
     steps:
+- task: InvokeRESTAPI@1
+  inputs:
+    connectionType: 'connectedServiceName'
+    serviceConnection: 'E_Change_Control_Connection'
+    method: 'POST'
+    body: |
+      {
+      "buildNumber": "$(build.buildId)",
+      "isMultiBranch": "true",
+      "branchName": "$(build.sourceBranchName)"
+      }
+    waitForCompletion: 'true'
     - task: Delay@1
       inputs:
         delayForMinutes: '0'
