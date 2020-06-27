@@ -1,4 +1,4 @@
-trigger:
+asddtrigger:
 - master
 name: $(Date:yyyyMMdd)$(Rev:.r)
 stages:
