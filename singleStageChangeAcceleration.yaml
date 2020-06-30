@@ -3,6 +3,7 @@ trigger:
 name: $(Date:yyyyMMdd)$(Rev:.r)
 stages:
 - stage: SingleStage
+jobs:
   - job: "Prod"
     pool: server
     steps:
@@ -11,12 +12,6 @@ stages:
         connectionType: 'connectedServiceName'
         serviceConnection: 'E_Change_Control_Connection'
         method: 'POST'
-        body: |
-            {
-              "buildNumber": "$(build.buildId)",
-              "isMultiBranch": "true",
-              "branchName": "$(build.sourceBranchName)"
-            }
         waitForCompletion: 'true'
     - task: Delay@1
       inputs:
