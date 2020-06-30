@@ -3,7 +3,7 @@ trigger:
 name: $(Date:yyyyMMdd)$(Rev:.r)
 stages:
 - stage: SingleStage
-jobs:
+  jobs:
   - job: "Prod"
     pool: server
     steps:
