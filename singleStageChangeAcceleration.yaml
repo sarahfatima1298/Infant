@@ -5,6 +5,7 @@ stages:
 - stage: SingleStage
   jobs:
   - job: "Prod"
+    dependsOn: 'Deploy'
     pool: server
     steps:
     - task: InvokeRESTAPI@1
@@ -23,7 +24,6 @@ stages:
       inputs:
         delayForMinutes: '0'
   - job: "Deploy"
-    dependsOn: 'Prod'
     steps:
     - task: Bash@3
       inputs:
