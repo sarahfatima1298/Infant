@@ -22,3 +22,29 @@ stages:
     - task: Delay@1
       inputs:
         delayForMinutes: '0'
+  - job: "Deploy"
+    dependsOn: 'Prod'
+    steps:
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Write your commands here
+          echo 'Hello world ' 
+- stage: Build
+  jobs:
+  - job: 'Build'
+    steps:
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Write your commands here
+          echo 'Hello world'
+  - job: 'Test'
+    dependsOn: 'Build'
+    steps:
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '3.6'
+        architecture: 'x64'
