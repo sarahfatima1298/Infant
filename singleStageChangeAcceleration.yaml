@@ -4,8 +4,8 @@ name: $(Date:yyyyMMdd)$(Rev:.r)
 stages:
 - stage: SingleStage
   jobs:
-  - job: "Prod"
-    dependsOn: 'Deploy'
+  - job: "Prod1"
+    dependsOn: 'Deploy1'
     pool: server
     steps:
     - task: InvokeRESTAPI@1
@@ -23,7 +23,7 @@ stages:
     - task: Delay@1
       inputs:
         delayForMinutes: '0'
-  - job: "Deploy"
+  - job: "Deploy1"
     steps:
     - task: Bash@3
       inputs:
@@ -33,7 +33,7 @@ stages:
           echo 'Hello world ' 
 - stage: Build
   jobs:
-  - job: 'Build'
+  - job: 'Build1'
     steps:
     - task: Bash@3
       inputs:
@@ -41,8 +41,8 @@ stages:
         script: |
           # Write your commands here
           echo 'Hello world'
-  - job: 'Test'
-    dependsOn: 'Build'
+  - job: 'Test1'
+    dependsOn: 'Build1'
     steps:
     - task: UsePythonVersion@0
       inputs:
