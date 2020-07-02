@@ -3,6 +3,7 @@ trigger:
 name: $(Date:yyyyMMdd)$(Rev:.r)
 stages:
 - stage: SingleStage
+  dependsOn: []
   jobs:
   - job: "One"
     dependsOn: 'Two'
@@ -32,6 +33,7 @@ stages:
           # Write your commands here
           echo 'Hello world ' 
 - stage: Build
+  dependsOn: []
   jobs:
   - job: 'Three'
     steps:
