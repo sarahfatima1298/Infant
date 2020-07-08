@@ -3,7 +3,6 @@ trigger:
 name: $(Date:yyyyMMdd)$(Rev:.r)
 stages:
 - stage: SingleStage
-  dependsOn: []
   jobs:
   - job: "One"
     dependsOn: 'Two'
