@@ -4,25 +4,6 @@ name: $(Date:yyyyMMdd)$(Rev:.r)
 stages:
 - stage: SingleStage
   jobs:
-  - job: "One"
-    dependsOn: 'Two'
-    pool: server
-    steps:
-    - task: InvokeRESTAPI@1
-      inputs:
-        connectionType: 'connectedServiceName'
-        serviceConnection: 'API'
-        method: 'POST'
-        body: |
-          {
-            "buildNumber": "$(build.buildId)",
-            "isMultiBranch": "true",
-            "branchName": "$(build.sourceBranchName)"
-          }
-        waitForCompletion: 'true'
-    - task: Delay@1
-      inputs:
-        delayForMinutes: '0'
   - job: "Two"
     steps:
     - task: Bash@3
