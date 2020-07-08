@@ -33,7 +33,6 @@ stages:
           # Write your commands here
           echo 'Hello world ' 
 - stage: Build
-  dependsOn: []
   jobs:
   - job: 'Three'
     steps:
